@@ -1,0 +1,69 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "User account information and registration details",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "role": { "type": "string", "enum": ["student", "admin"] },
+        "rollNumber": { "type": "string" },
+        "branch": { "type": "string" },
+        "year": { "type": "string" },
+        "hostelBlock": { "type": "string" }
+      },
+      "required": ["name", "email", "role"]
+    },
+    "Complaint": {
+      "title": "Complaint",
+      "description": "A student grievance ticket with fields, AI parameters, and status transitions",
+      "type": "object",
+      "properties": {
+        "ticketId": { "type": "string" },
+        "studentId": { "type": "string" },
+        "studentEmail": { "type": "string" },
+        "isAnonymous": { "type": "boolean" },
+        "category": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "fileURL": { "type": "string" },
+        "severity": { "type": "string", "enum": ["Urgent", "Normal", "Low"] },
+        "aiSummary": { "type": "string" },
+        "suggestedAction": { "type": "string" },
+        "status": { "type": "string", "enum": ["Submitted", "In Review", "Resolved", "Rejected", "Escalated"] },
+        "assignedTo": { "type": "string" },
+        "adminNote": { "type": "string" },
+        "escalated": { "type": "boolean" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" },
+        "statusHistory": { "type": "array" }
+      },
+      "required": ["ticketId", "studentId", "category", "title", "description", "status"]
+    },
+    "AdminConfig": {
+      "title": "Admin Configuration",
+      "description": "System configuration with list of admin email addresses",
+      "type": "object",
+      "properties": {
+        "emails": { "type": "array" }
+      },
+      "required": ["emails"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "/complaints/{complaintId}": {
+      "schema": "Complaint",
+      "description": "Student submitted grievance complaints"
+    },
+    "/config/admins": {
+      "schema": "AdminConfig",
+      "description": "Admin email lists configurations"
+    }
+  }
+}

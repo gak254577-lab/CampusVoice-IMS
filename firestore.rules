@@ -1,0 +1,79 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 1. Global Safety Net: Default deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helpers
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && 
+             request.auth.token.email != null && (
+               request.auth.token.email == "gak254577@gmail.com" ||
+               request.auth.token.email == "admin@imsec.ac.in" ||
+               request.auth.token.email == "director@imsec.ac.in" ||
+               request.auth.token.email == "registrar@imsec.ac.in" ||
+               request.auth.token.email == "warden@imsec.ac.in"
+             );
+    }
+
+    function isImsecUser() {
+      return isSignedIn() && 
+             request.auth.token.email != null && (
+               request.auth.token.email.matches('.*@imsec\\.ac\\.in$') ||
+               request.auth.token.email == "gak254577@gmail.com"
+             );
+    }
+
+    // Users Collection Rule
+    match /users/{userId} {
+      allow read: if isImsecUser() && (isOwner(userId) || isAdmin());
+      allow create: if isImsecUser() && isOwner(userId);
+      allow update: if isImsecUser() && (
+        (isOwner(userId) && (!request.resource.data.keys().hasAll(['role']) || request.resource.data.role == resource.data.role)) ||
+        isAdmin()
+      );
+      allow delete: if isAdmin();
+    }
+
+    // Complaints Collection Rule
+    match /complaints/{complaintId} {
+      // Support sharing and viewing complaints across devices for peer review/awareness
+      allow read: if isAdmin() || isImsecUser();
+      allow list: if isAdmin() || isImsecUser();
+
+      // Student creates complaint with studentId matching logged in uid
+      allow create: if isImsecUser() && request.resource.data.studentId == request.auth.uid;
+
+      // Student can update if it is their own complaint, they can only make edits in Submitted state
+      allow update: if isAdmin() || (
+        isImsecUser() && resource.data.studentId == request.auth.uid &&
+        resource.data.status == "Submitted" &&
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['title', 'description', 'category', 'isAnonymous', 'fileURL', 'updatedAt'])
+      );
+
+      allow delete: if isAdmin();
+    }
+
+    // Config Collection Rule
+    match /config/admins {
+      allow read: if isImsecUser();
+      allow write: if isImsecUser() && (
+        request.auth.token.email == "gak254577@gmail.com" ||
+        request.auth.token.email == "admin@imsec.ac.in" ||
+        request.auth.token.email == "director@imsec.ac.in" ||
+        request.auth.token.email == "registrar@imsec.ac.in" ||
+        request.auth.token.email == "warden@imsec.ac.in"
+      );
+    }
+  }
+}

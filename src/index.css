@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-syne: "Syne", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --color-imsec-navy: #0A0D14;
+  --color-imsec-card: #161B2A;
+  --color-imsec-border: rgba(255, 255, 255, 0.07);
+  --color-accent-blue: #4F7FFF;
+  --color-accent-purple: #A78BFA;
+  --color-accent-green: #34D399;
+  --color-accent-orange: #FB923C;
+  --color-accent-red: #EF4444;
+}
+
+/* Base resets */
+body {
+  background-color: #0A0D14;
+  color: #E2E8F0;
+  font-family: var(--font-sans);
+  font-weight: 300;
+  margin: 0;
+  overflow-x: hidden;
+  cursor: none; /* Hide default cursor to enable the glowing Ring Cursor */
+}
+
+/* Dot Grid Pattern with dynamic keyframe slide */
+.bg-dot-grid {
+  background-image: radial-gradient(rgba(79, 127, 255, 0.06) 1px, transparent 1px);
+  background-size: 20px 20px;
+  animation: dot-move 120s linear infinite;
+}
+
+@keyframes dot-move {
+  0% { background-position: 0px 0px; }
+  100% { background-position: 1000px 1000px; }
+}
+
+/* Floating Glow Blobs Keyframes */
+@keyframes float-blob-blue {
+  0% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(120px, -180px) scale(1.15); }
+  66% { transform: translate(-80px, 80px) scale(0.9); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+@keyframes float-blob-purple {
+  0% { transform: translate(0px, 0px) scale(1); }
+  50% { transform: translate(-140px, 140px) scale(1.2); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+@keyframes float-blob-green {
+  0% { transform: translate(0px, 0px) scale(1.1); }
+  45% { transform: translate(200px, 60px) scale(0.85); }
+  100% { transform: translate(0px, 0px) scale(1.1); }
+}
+
+.blob-blue {
+  animation: float-blob-blue 28s ease-in-out infinite;
+}
+
+.blob-purple {
+  animation: float-blob-purple 34s ease-in-out infinite;
+}
+
+.blob-green {
+  animation: float-blob-green 42s ease-in-out infinite;
+}
+
+/* Premium Shadows & Glows */
+.shadow-premium-card {
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.shadow-button-glow {
+  box-shadow: 0 0 16px rgba(79, 127, 255, 0.25);
+}
+
+.shadow-button-glow-hover {
+  box-shadow: 0 0 24px rgba(167, 139, 250, 0.45);
+}
+
+/* Skeleton loader Shimmer */
+.shimmer-bg {
+  position: relative;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.shimmer-bg::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-100%);
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.05) 20%,
+    rgba(255, 255, 255, 0.1) 60%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shimmer 1.8s infinite;
+  content: '';
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Shake error for form validation inputs */
+@keyframes shake-error {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-5px); }
+  45%, 80% { transform: translateX(5px); }
+}
+
+.animate-shake {
+  animation: shake-error 0.4s ease-in-out;
+}
+
+/* Custom interactive scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0A0D14;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(79, 127, 255, 0.4);
+}
+
+/* Timeline animations */
+.timeline-grow-line {
+  position: relative;
+}
+
+.timeline-grow-line::after {
+  content: '';
+  position: absolute;
+  top: 10px;
+  bottom: 0;
+  left: 7px;
+  width: 2px;
+  background: linear-gradient(to bottom, #4F7FFF, #A78BFA);
+  opacity: 0.3;
+}
+
+/* Active ring effect helper */
+.interactive-hover:hover {
+  cursor: none;
+}
