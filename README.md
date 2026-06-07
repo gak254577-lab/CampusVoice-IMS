@@ -45,79 +45,9 @@ CampusVoice is a highly modern, responsive grievance lodgement and support manag
 │       └── SkeletonLoader.tsx  # Dynamic mock content layout skeleton
 ```
 
----
-
-## 💻 Manual Sync: How to Update Your Local VS Code (Without Re-extracting)
-
-If you have already downloaded the previous project ZIP and are editing it directly in VS Code, **do not re-extract a new folder**. You can sync your local files directly by making these short edits:
-
-### 1. Update `/index.html` Title tag
-To replace the default Google AI Studio bar title, open `/index.html` in your VS Code and modify the `<title>` tag in the `<head>` section:
-
-```html
-<!-- Locate this lines around line 6 in index.html -->
-<title>CampusVoice | IMS Engineering College</title>
-```
-
-### 2. Update `/src/App.tsx` For Serverless/Offline Fallbacks
-When you deploy on static hosting like Netlify (which has no Node.js backend to run `server.ts`), calling `/api/gemini/analyze-complaint` directly returns a `404` server error. We added a **fail-safe client-side fallback** to solve this.
-
-Locate the `handleSubmitGrievance` function in `/src/App.tsx` (around **line 754**) and replace the old `fetch('/api/gemini/analyze-complaint')` try-catch block with this dynamic handler:
-
-```typescript
-    try {
-      // 1. Prepare deterministic client-side AI fallback. This is used if the Express backend
-      // server is unreachable (e.g., when hosted on static platforms like Netlify/Vercel).
-      let aiAnalysis: {
-        severity: 'Urgent' | 'Normal' | 'Low';
-        aiSummary: string;
-        suggestedAction: string;
-      } = {
-        severity: 'Normal',
-        aiSummary: `Complaint about ${newComplaint.category || "issue"}: "${newComplaint.title || "No Title"}"`,
-        suggestedAction: `Assign ticket to the ${newComplaint.category || "General"} department representative for priority review.`
-      };
-
-      const descLower = newComplaint.description.toLowerCase();
-      if (descLower.includes("urgent") || descLower.includes("emergency") || descLower.includes("shock") || descLower.includes("fire") || descLower.includes("safety") || descLower.includes("broken wire") || descLower.includes("spark")) {
-        aiAnalysis.severity = 'Urgent';
-      }
-
-      try {
-        // Attempt to call Gemini analysis endpoint on our Node server proxy
-        const geminiRes = await fetch('/api/gemini/analyze-complaint', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            title: newComplaint.title,
-            description: newComplaint.description,
-            category: newComplaint.category
-          })
-        });
-
-        if (geminiRes.ok) {
-          const parsedRes = await geminiRes.json();
-          if (parsedRes && (parsedRes.severity || parsedRes.aiSummary || parsedRes.suggestedAction)) {
-            const returnedSeverity = parsedRes.severity;
-            aiAnalysis = {
-              severity: (returnedSeverity === 'Urgent' || returnedSeverity === 'Normal' || returnedSeverity === 'Low')
-                ? returnedSeverity
-                : aiAnalysis.severity,
-              aiSummary: parsedRes.aiSummary || aiAnalysis.aiSummary,
-              suggestedAction: parsedRes.suggestedAction || aiAnalysis.suggestedAction
-            };
-          }
-        } else {
-          console.warn(`Express backend AI service unavailable (Status ${geminiRes.status}). Operating on standard client-side analysis fallback.`);
-        }
-      } catch (geminiErr) {
         console.warn("Express backend API offline or unreachable (Netlify/Vercel static host). Local analysis fallback activated:", geminiErr);
       }
 ```
-
----
 
 ## ⚙️ Running Locally
 
