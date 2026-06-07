@@ -54,8 +54,9 @@ CampusVoice is a highly modern, responsive grievance lodgement and support manag
 ### Prerequisites
 - Node.js installed on your machine.
 - A Firebase/Firestore config configured inside `/src/firebase.ts`.
-
+ ```
 ### Steps
+
 1. Navigate to the project root:
    ```bash
    cd campusvoice
@@ -76,3 +77,6 @@ CampusVoice is a highly modern, responsive grievance lodgement and support manag
    ```bash
    npm run build
    ```
+
+
+
