@@ -751,23 +751,55 @@ export default function App() {
 
     try {
       // 1. Call Gemini analysis endpoint on our Node server proxy
-      const geminiRes = await fetch('/api/gemini/analyze-complaint', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          title: newComplaint.title,
-          description: newComplaint.description,
-          category: newComplaint.category
-        })
-      });
+     // 1. Prepare deterministic client-side AI fallback. This is used if the Express backend
+      // server is unreachable (e.g., when hosted on static platforms like Netlify/Vercel).
+      let aiAnalysis: {
+        severity: 'Urgent' | 'Normal' | 'Low';
+        aiSummary: string;
+        suggestedAction: string;
+      } = {
+        severity: 'Normal',
+        aiSummary: `Complaint about ${newComplaint.category || "issue"}: "${newComplaint.title || "No Title"}"`,
+        suggestedAction: `Assign ticket to the ${newComplaint.category || "General"} department representative for priority review.`
+      };
 
-      if (!geminiRes.ok) {
-        throw new Error(`Server returned error status ${geminiRes.status}: ${geminiRes.statusText}`);
+      const descLower = newComplaint.description.toLowerCase();
+      if (descLower.includes("urgent") || descLower.includes("emergency") || descLower.includes("shock") || descLower.includes("fire") || descLower.includes("safety") || descLower.includes("broken wire") || descLower.includes("spark")) {
+        aiAnalysis.severity = 'Urgent';
       }
 
-      const aiAnalysis = await geminiRes.json();
+      try {
+        // Attempt to call Gemini analysis endpoint on our Node server proxy
+        const geminiRes = await fetch('/api/gemini/analyze-complaint', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            title: newComplaint.title,
+            description: newComplaint.description,
+            category: newComplaint.category
+          })
+        });
+
+        if (geminiRes.ok) {
+          const parsedRes = await geminiRes.json();
+          if (parsedRes && (parsedRes.severity || parsedRes.aiSummary || parsedRes.suggestedAction)) {
+            const returnedSeverity = parsedRes.severity;
+            aiAnalysis = {
+              severity: (returnedSeverity === 'Urgent' || returnedSeverity === 'Normal' || returnedSeverity === 'Low')
+                ? returnedSeverity
+                : aiAnalysis.severity,
+              aiSummary: parsedRes.aiSummary || aiAnalysis.aiSummary,
+              suggestedAction: parsedRes.suggestedAction || aiAnalysis.suggestedAction
+            };
+          }
+        } else {
+          console.warn(`Express backend AI service unavailable (Status ${geminiRes.status}). Operating on standard client-side analysis fallback.`);
+        }
+      } catch (geminiErr) {
+        console.warn("Express backend API offline or unreachable (Netlify/Vercel static host). Local analysis fallback activated:", geminiErr);
+      }
 
       // 2. Output unique CV ticket ID
       const randomID = Math.floor(10000 + Math.random() * 90000);
