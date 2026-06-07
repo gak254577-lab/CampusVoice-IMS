@@ -13,6 +13,9 @@
 
 CampusVoice is a highly modern, responsive grievance lodgement and support management system built for the students of **IMS Engineering College (IMSEC)**. It bridges the gap between student issues (facilities, academics, Wi-Fi, hostel, administration) and the resolution committee through transparent real-time state tracking, interactive statistics, and local/production authentication.
 
+🚀 Check out the live demo here: [  https://campussvoice.netlify.app  ]
+
+
 ---
 
 ## 🛠 Features
