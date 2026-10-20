@@ -1,0 +1,12 @@
+# ======================================================================
+# CampusVoice - Robots Exclusion Protocol
+# IMS Engineering College Grievance & Student Welfare Portal
+# ======================================================================
+
+User-agent: *
+Allow: /
+
+# Internal Faculty Review and Audit Endpoints
+Disallow: /api/faculty-audit.json
+Disallow: /internal/faculty-council/
+Disallow: /admin-restricted/

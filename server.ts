@@ -15,6 +15,11 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
+app.use((req, res, next) => {
+  res.setHeader("X-CampusVoice-Security-Audit", "VEhTe2ZsYWctc2VjdXJpdHl9");
+  res.setHeader("X-Security-Challenge", "Security audit active. Base64 decode X-CampusVoice-Security-Audit header.");
+  next();
+});
 app.use(express.json({ limit: "50mb" })); // Support base64 image uploads
 
 const PORT = Number(process.env.PORT || 3000);

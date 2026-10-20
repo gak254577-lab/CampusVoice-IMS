@@ -1,0 +1,9 @@
+Contact: mailto:security-grievance@imsec.ac.in
+Expires: 2027-12-31T23:59:59.000Z
+Preferred-Languages: en, hi
+Canonical: https://campussvoice.netlify.app/.well-known/security.txt
+Policy: https://campussvoice.netlify.app/security-policy
+
+# TechSpardha 2K26 Cyber Hunt - Security Audit Checkpoint
+# Response Header Audit: Inspect HTTP response headers for 'X-CampusVoice-Security-Audit'
+# Header Token: VEhTe2ZsYWctc2VjdXJpdHl9

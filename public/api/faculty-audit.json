@@ -1,0 +1,14 @@
+{
+  "institution": "IMS Engineering College (IMSEC)",
+  "portal": "CampusVoice Faculty Grievance Redressal Committee",
+  "classification": "CONFIDENTIAL - COMMITTEE MEMBERS ONLY",
+  "auditCycle": "2025-2026",
+  "committeeChair": "Dean Student Welfare & Faculty Affairs",
+  "verificationStatus": "VALIDATED",
+  "timestamp": "2026-10-15T09:30:00Z",
+  "facultySecuritySignature": {
+    "format": "hex",
+    "hash": "5448537b666c61672d666163756c74797d",
+    "description": "Decode hex string to retrieve committee authorization flag."
+  }
+}
