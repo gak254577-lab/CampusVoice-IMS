@@ -1,0 +1,62 @@
+CampusVoice — Bug Tracker (Archived)
+=====================================
+Format: [ID] [Severity] [Status] - Description
+Archived: August 2025
+
+-----------------------------------------------------
+RESOLVED BUGS
+-----------------------------------------------------
+
+[BUG-001] HIGH | FIXED
+Title: Login page crashes on Safari iOS 16
+Description: The Google sign-in popup was blocked by Safari's popup blocker.
+Fix: Added try-catch around signInWithPopup and displayed fallback message.
+Fixed in: v1.1
+
+[BUG-002] MEDIUM | FIXED
+Title: Complaint form does not validate empty title
+Description: Students could submit complaints with blank titles.
+Fix: Added required field validation and shake animation on error.
+Fixed in: v1.1
+
+[BUG-003] HIGH | FIXED
+Title: Admin could not see complaints from other branches
+Description: Firestore query was filtering by studentId incorrectly.
+Fix: Updated Firestore rules to allow admin to read all complaints.
+Fixed in: v1.2
+
+[BUG-004] LOW | FIXED
+Title: Notification bell count not resetting after clearing
+Description: The notification count badge remained visible after clicking "Clear All".
+Fix: Added setNotifications([]) on clear button click.
+Fixed in: v1.3
+
+[BUG-005] MEDIUM | FIXED
+Title: File upload fails for images larger than 2MB
+Description: Large image files caused base64 string to exceed Firestore document size limit.
+Fix: Added client-side image compression before encoding.
+Fixed in: v1.3
+
+[BUG-006] LOW | FIXED
+Title: Dark mode inconsistency on Settings page
+Description: Some settings section backgrounds appeared white in dark mode.
+Fix: Applied consistent bg-imsec-card class across all settings panels.
+Fixed in: v1.4
+
+-----------------------------------------------------
+KNOWN ISSUES (Deferred to v2)
+-----------------------------------------------------
+
+[BUG-007] LOW | DEFERRED
+Title: Page title does not update on route change
+Description: Browser tab still shows "CampusVoice" on all views.
+Notes: Requires implementing React Helmet or document.title updates per view.
+
+[BUG-008] LOW | DEFERRED
+Title: Long complaint descriptions overflow on mobile
+Description: Ticket detail cards with lengthy descriptions break layout below 360px width.
+Notes: CSS truncation or collapsible view needed.
+
+-----------------------------------------------------
+End of bug tracker archive.
+-----------------------------------------------------

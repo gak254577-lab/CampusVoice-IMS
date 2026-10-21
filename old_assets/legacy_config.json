@@ -1,0 +1,46 @@
+{
+  "_comment": "ARCHIVED - This configuration is outdated and no longer in use. Do not use this file.",
+  "_archived_on": "2025-08-30",
+  "_replaced_by": "Environment variables and firebase-applet-config.json",
+
+  "app": {
+    "name": "CampusVoice",
+    "version": "0.9.2-beta",
+    "environment": "development",
+    "locale": "en-IN",
+    "timezone": "Asia/Kolkata"
+  },
+
+  "legacy_features": {
+    "email_notifications": false,
+    "sms_alerts": false,
+    "parent_portal": false,
+    "offline_pwa": false,
+    "multi_college": false
+  },
+
+  "mock_departments": [
+    "Hostel Management",
+    "Academic Affairs",
+    "Student Welfare",
+    "Infrastructure",
+    "Canteen & Facilities",
+    "IT & Network",
+    "Library",
+    "Administration"
+  ],
+
+  "placeholder_severity_rules": {
+    "Urgent": ["safety", "fire", "shock", "emergency", "broken wire", "flood"],
+    "Normal": ["maintenance", "repair", "noise", "cleanliness"],
+    "Low": ["suggestion", "feedback", "general inquiry"]
+  },
+
+  "deprecated_endpoints": [
+    "/api/v1/complaints",
+    "/api/v1/users",
+    "/api/v1/notify"
+  ],
+
+  "_note": "All active configuration is now managed through environment variables. This file is kept for historical reference only."
+}

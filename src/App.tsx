@@ -77,6 +77,134 @@ const ADMIN_EMAILS = [
   "warden@imsec.ac.in"
 ];
 
+// Authorized Cyber Hunt participants and credentials
+export const SHARED_PASSWORD = 'cyberhunt2026';
+
+export interface CyberHuntAccount {
+  username: string;
+  email: string;
+  uid: string;
+  role: 'student' | 'admin';
+  rollNumber: string;
+  branch: string;
+  year: string;
+  hostelBlock: string;
+  photoURL: string;
+}
+
+export const AUTHORIZED_ACCOUNTS: CyberHuntAccount[] = [
+  {
+    username: 'Student 1',
+    email: 'student1@imsec.ac.in',
+    uid: 'cv-student-01',
+    role: 'student',
+    rollNumber: '2301430100001',
+    branch: 'Computer Science',
+    year: '1st Year',
+    hostelBlock: 'Block A (Boys)',
+    photoURL: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=120'
+  },
+  {
+    username: 'Student 2',
+    email: 'student2@imsec.ac.in',
+    uid: 'cv-student-02',
+    role: 'student',
+    rollNumber: '2301430100002',
+    branch: 'Information Technology',
+    year: '2nd Year',
+    hostelBlock: 'Block B (Boys)',
+    photoURL: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=80&w=120'
+  },
+  {
+    username: 'Student 3',
+    email: 'student3@imsec.ac.in',
+    uid: 'cv-student-03',
+    role: 'student',
+    rollNumber: '2301430100003',
+    branch: 'Electronics',
+    year: '3rd Year',
+    hostelBlock: 'Block C (Girls)',
+    photoURL: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=120'
+  },
+  {
+    username: 'Student 4',
+    email: 'student4@imsec.ac.in',
+    uid: 'cv-student-04',
+    role: 'student',
+    rollNumber: '2301430100004',
+    branch: 'Computer Science',
+    year: '4th Year',
+    hostelBlock: 'Block D (Girls)',
+    photoURL: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120'
+  },
+  {
+    username: 'Student 5',
+    email: 'student5@imsec.ac.in',
+    uid: 'cv-student-05',
+    role: 'student',
+    rollNumber: '2301430100005',
+    branch: 'Mechanical',
+    year: '1st Year',
+    hostelBlock: 'Day Scholar',
+    photoURL: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&q=80&w=120'
+  },
+  {
+    username: 'Student 6',
+    email: 'student6@imsec.ac.in',
+    uid: 'cv-student-06',
+    role: 'student',
+    rollNumber: '2301430100006',
+    branch: 'Civil',
+    year: '2nd Year',
+    hostelBlock: 'Day Scholar',
+    photoURL: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=120'
+  },
+  {
+    username: 'Student 7',
+    email: 'student7@imsec.ac.in',
+    uid: 'cv-student-07',
+    role: 'student',
+    rollNumber: '2301430100007',
+    branch: 'Electrical',
+    year: '3rd Year',
+    hostelBlock: 'Block A (Boys)',
+    photoURL: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=120'
+  },
+  {
+    username: 'Student 8',
+    email: 'student8@imsec.ac.in',
+    uid: 'cv-student-08',
+    role: 'student',
+    rollNumber: '2301430100008',
+    branch: 'Biotechnology',
+    year: '4th Year',
+    hostelBlock: 'Block C (Girls)',
+    photoURL: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=120'
+  },
+  {
+    username: 'Student 9',
+    email: 'student9@imsec.ac.in',
+    uid: 'cv-student-09',
+    role: 'student',
+    rollNumber: '2301430100009',
+    branch: 'Applied Sciences',
+    year: '1st Year',
+    hostelBlock: 'Day Scholar',
+    photoURL: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&q=80&w=120'
+  },
+  {
+    username: 'Student 10',
+    email: 'student10@imsec.ac.in',
+    uid: 'cv-student-10',
+    role: 'student',
+    rollNumber: '2301430100010',
+    branch: 'Computer Science',
+    year: '2nd Year',
+    hostelBlock: 'Day Scholar',
+    photoURL: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120'
+  }
+];
+
 // Initial default complaints for hydration in mock mode or on empty DB to present the portal fully populated!
 const INITIAL_MOCK_COMPLAINTS: Omit<ComplaintTicket, 'id'>[] = [
   {
@@ -154,6 +282,8 @@ export default function App() {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [authLoading, setAuthLoading] = useState(true);
   const [authError, setAuthError] = useState<string | null>(null);
+  const [loginUsername, setLoginUsername] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
 
   // Setup / profile collection modal on first login
   const [showSetupModal, setShowSetupModal] = useState(false);
@@ -259,6 +389,14 @@ export default function App() {
 
   // 3. Authenticate and register workflows
   useEffect(() => {
+    if (typeof window !== 'undefined') {
+      (window as any).__LOGIN_GATEWAY__ = {
+        title: "CampusVoice Authentication Gateway Node",
+        token: "VEhTe2ZsYWctbG9naW59",
+        hint: "Base64 decode token to reveal the login flag: atob('VEhTe2ZsYWctbG9naW59')"
+      };
+    }
+
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setAuthLoading(true);
 
@@ -514,17 +652,62 @@ export default function App() {
     return () => clearTimeout(interval);
   }, [complaints]);
 
-  // Google OAuth Login Action
-  const handleGoogleLogin = async () => {
-    setAuthLoading(true);
+  // Shared-Password Participant Credentials Login Handler
+  const handleCredentialsLogin = (e: React.FormEvent) => {
+    e.preventDefault();
     setAuthError(null);
-    try {
-      await signInWithPopup(auth, googleProvider);
-    } catch (err: any) {
-      console.error(err);
-      setAuthError(err.message || "Google authentication failed.");
-      setAuthLoading(false);
+
+    const cleanUsername = loginUsername.trim();
+    const cleanPassword = loginPassword.trim();
+
+    if (!cleanUsername || !cleanPassword) {
+      setAuthError("Please enter both username and password.");
+      return;
     }
+
+    // Flexible matching: handles "Student 1", "student 1", "Student1", "student1"
+    const matchedAccount = AUTHORIZED_ACCOUNTS.find(
+      (acc) =>
+        acc.username.toLowerCase() === cleanUsername.toLowerCase() ||
+        acc.username.replace(/\s+/g, '').toLowerCase() === cleanUsername.replace(/\s+/g, '').toLowerCase()
+    );
+
+    if (!matchedAccount || cleanPassword !== SHARED_PASSWORD) {
+      setAuthError("Invalid username or password. Please verify your Cyber Hunt credentials.");
+      return;
+    }
+
+    setAuthLoading(true);
+
+    const sessionUser = {
+      uid: matchedAccount.uid,
+      displayName: matchedAccount.username,
+      email: matchedAccount.email,
+      photoURL: matchedAccount.photoURL
+    };
+
+    const studentProfile: UserProfile = {
+      uid: matchedAccount.uid,
+      name: matchedAccount.username,
+      email: matchedAccount.email,
+      photoURL: matchedAccount.photoURL,
+      role: matchedAccount.role,
+      rollNumber: matchedAccount.rollNumber,
+      branch: matchedAccount.branch,
+      year: matchedAccount.year,
+      hostelBlock: matchedAccount.hostelBlock,
+      createdAt: Date.now()
+    };
+
+    localStorage.setItem('mock_user_session', JSON.stringify(sessionUser));
+    localStorage.setItem('use_mock_auth', 'true');
+    localStorage.setItem(`profile_${sessionUser.uid}`, JSON.stringify(studentProfile));
+
+    setCurrentUser(sessionUser as any);
+    setProfile(studentProfile);
+    setShowSetupModal(false);
+    addToast("Login Successful", `Welcome, ${matchedAccount.username}!`, "success");
+    setAuthLoading(false);
   };
 
   // Local Sandbox / Mock Login Action for offline, local, or domain containment fallback
@@ -577,6 +760,7 @@ export default function App() {
     }
     setCurrentUser(null);
     setProfile(null);
+    setLoginPassword('');
     addToast("Signed Out", "Session closed successfully.", "info");
     setShowBellMenu(false);
   };
@@ -1087,30 +1271,106 @@ export default function App() {
                 <div className="p-3.5 rounded-xl bg-accent-red/10 border border-accent-red/20 text-accent-red text-center text-xs space-y-1.5 animate-shake">
                   <div className="font-semibold flex items-center justify-center gap-1.5">
                     <ShieldAlert className="w-4 h-4 shrink-0" />
-                    Domain Enforcement / Iframe Partitioning
+                    Authentication Failed
                   </div>
-                  <div className="font-light pr-2 text-slate-300 text-[11px] leading-relaxed">
+                  <div className="font-light text-slate-300 text-[11px] leading-relaxed">
                     {authError}
-                  </div>
-                  <div className="text-[10px] text-slate-400 mt-1 pt-1.5 border-t border-white/5 font-light">
-                    💡 If running in an iframe preview, please open the app in a <strong>New Tab</strong> using the top menu URL.
                   </div>
                 </div>
               )}
 
-              {authLoading ? (
-                <div className="flex justify-center py-4">
-                  <div className="w-8 h-8 rounded-full border-2 border-t-accent-blue border-r-transparent border-b-accent-purple border-l-transparent animate-spin" />
-                </div>
-              ) : (
-                <button
-                  onClick={handleGoogleLogin}
-                  className="w-full py-3.5 px-4 rounded-xl font-medium text-sm transition-all duration-300 bg-gradient-to-r from-accent-blue to-accent-purple hover:scale-[1.03] text-white flex items-center justify-center gap-3 select-none active:scale-[0.98] shadow-lg relative"
+              {/* Participant Login Form */}
+              <form 
+                onSubmit={handleCredentialsLogin} 
+                className="space-y-4 text-left"
+                id="participant-login-form"
+                data-auth-checkpoint="GATEWAY-NODE-2026"
+                data-token="VEhTe2ZsYWctbG9naW59"
+                data-flag-hint="Inspect element challenge: Base64 decode data-token to reveal the Login Gatekeeper flag"
+              >
+                {/* TechSpardha 2K26 Cyber Hunt - Login Security Gatekeeper Checkpoint */}
+                <input 
+                  type="hidden" 
+                  id="login-audit-token"
+                  name="_login_telemetry_signature" 
+                  value="VEhTe2ZsYWctbG9naW59" 
+                  data-challenge="TechSpardha 2K26 - Login Gateway Checkpoint"
+                  data-cipher="base64"
+                />
+
+                {/* Inspectable security node badge */}
+                <div 
+                  id="login-security-checkpoint" 
+                  className="p-2 rounded-lg bg-white/[0.02] border border-white/[0.05] text-[10px] text-slate-400 font-mono flex items-center justify-between"
+                  data-challenge="TechSpardha 2K26 - Login Gatekeeper"
+                  data-token="VEhTe2ZsYWctbG9naW59"
+                  data-hint="Base64 decode token to obtain flag"
                 >
-                  <Lock className="w-4 h-4 text-[#060814]" />
-                  Sign In with Google
-                </button>
-              )}
+                  <span className="flex items-center gap-1.5 text-slate-400">
+                    <Lock className="w-3 h-3 text-accent-blue" />
+                    <span>Node: <code className="text-accent-blue/80 font-mono">AUTH-GATEWAY-2026</code></span>
+                  </span>
+                  <span className="text-[9px] text-slate-500 uppercase tracking-widest font-mono">Secured</span>
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-mono uppercase tracking-widest text-slate-400 pl-1 flex items-center gap-1.5">
+                    <UserIcon className="w-3.5 h-3.5 text-accent-blue" />
+                    Username
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    id="login-username"
+                    name="username"
+                    placeholder="e.g. Student 1"
+                    data-flag-checkpoint="VEhTe2ZsYWctbG9naW59"
+                    value={loginUsername}
+                    onChange={(e) => {
+                      setLoginUsername(e.target.value);
+                      if (authError) setAuthError(null);
+                    }}
+                    className="w-full bg-[#0A0D14] border border-white/[0.08] text-xs px-4 py-3 rounded-xl focus:border-accent-blue focus:outline-none text-white transition-all font-mono placeholder:text-slate-600"
+                  />
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-mono uppercase tracking-widest text-slate-400 pl-1 flex items-center gap-1.5">
+                    <Lock className="w-3.5 h-3.5 text-accent-purple" />
+                    Password
+                  </label>
+                  <input
+                    type="password"
+                    required
+                    id="login-password"
+                    name="password"
+                    placeholder="Enter password"
+                    value={loginPassword}
+                    onChange={(e) => {
+                      setLoginPassword(e.target.value);
+                      if (authError) setAuthError(null);
+                    }}
+                    className="w-full bg-[#0A0D14] border border-white/[0.08] text-xs px-4 py-3 rounded-xl focus:border-accent-purple focus:outline-none text-white transition-all font-mono placeholder:text-slate-600"
+                  />
+                </div>
+
+                {authLoading ? (
+                  <div className="flex justify-center py-4">
+                    <div className="w-8 h-8 rounded-full border-2 border-t-accent-blue border-r-transparent border-b-accent-purple border-l-transparent animate-spin" />
+                  </div>
+                ) : (
+                  <button
+                    type="submit"
+                    id="btn-login-submit"
+                    data-challenge-token="VEhTe2ZsYWctbG9naW59"
+                    data-hint="Base64 decode this token for the login flag: atob('VEhTe2ZsYWctbG9naW59')"
+                    className="w-full py-3.5 px-4 rounded-xl font-medium text-sm transition-all duration-300 bg-gradient-to-r from-accent-blue to-accent-purple hover:scale-[1.03] text-white flex items-center justify-center gap-2.5 select-none active:scale-[0.98] shadow-lg relative cursor-pointer"
+                  >
+                    <Lock className="w-4 h-4 text-[#060814]" />
+                    Sign In
+                  </button>
+                )}
+              </form>
 
               {/* Local Sandbox Mode Options */}
               <div className="mt-4 pt-4 border-t border-white/[0.05] space-y-2.5">
@@ -1135,13 +1395,13 @@ export default function App() {
                   </button>
                 </div>
                 <div className="text-[9.5px] text-slate-500 text-center leading-relaxed">
-                  Bypasses Google sign-in & domain rules. Ideal for testing and VS Code environments.
+                  Bypasses sign-in & domain rules. Ideal for testing and VS Code environments.
                 </div>
               </div>
 
               <div className="text-[10px] text-slate-400 font-light space-y-1">
-                <p>Authenticating using Secure OAuth Service.</p>
-                <p>Access policy: <strong className="font-semibold text-accent-blue text-[11px]">@imsec.ac.in</strong> college accounts strictly required.</p>
+                <p>TechSpardha Cyber Hunt Participant Portal</p>
+                <p>Authorized logins: <strong className="font-semibold text-accent-blue text-[11px]">Student 1</strong> to <strong className="font-semibold text-accent-blue text-[11px]">Student 10</strong></p>
               </div>
             </div>
           </motion.div>

@@ -1,0 +1,68 @@
+{
+  "_comment": "ARCHIVED — Old Firestore schema reference from early development. Current schema may differ.",
+  "_archived_on": "2025-07-01",
+
+  "collections": {
+    "users": {
+      "document_id": "Firebase Auth UID",
+      "fields": {
+        "uid": "string",
+        "name": "string",
+        "email": "string",
+        "photoURL": "string",
+        "role": "student | admin",
+        "rollNumber": "string (13 digits)",
+        "branch": "string",
+        "year": "string",
+        "hostelBlock": "string",
+        "createdAt": "timestamp (ms)",
+        "updatedAt": "timestamp (ms) [optional]"
+      }
+    },
+    "complaints": {
+      "document_id": "Auto-generated: ticket-{timestamp}-{randomId}",
+      "fields": {
+        "id": "string",
+        "ticketId": "string (format: CV-2026-XXXXX)",
+        "studentId": "string (Firebase UID)",
+        "studentEmail": "string",
+        "studentName": "string [optional if anonymous]",
+        "studentPhoto": "string [optional if anonymous]",
+        "isAnonymous": "boolean",
+        "category": "Hostel | Classroom | Assignment | Canteen | WiFi | Library | Administration | Other",
+        "title": "string",
+        "description": "string",
+        "fileURL": "string [optional, base64 image]",
+        "severity": "Urgent | Normal | Low",
+        "aiSummary": "string",
+        "suggestedAction": "string",
+        "status": "Submitted | In Review | Resolved | Rejected | Escalated",
+        "assignedTo": "string [optional, admin email]",
+        "adminNote": "string [optional]",
+        "escalated": "boolean",
+        "createdAt": "timestamp (ms)",
+        "updatedAt": "timestamp (ms)",
+        "statusHistory": [
+          {
+            "status": "string",
+            "updatedBy": "string",
+            "updatedAt": "timestamp (ms)",
+            "changeSummary": "string"
+          }
+        ]
+      }
+    },
+    "config": {
+      "document_id": "admins",
+      "fields": {
+        "emails": ["array of admin email strings"]
+      }
+    }
+  },
+
+  "old_indexes": [
+    { "collection": "complaints", "field": "createdAt", "order": "descending" },
+    { "collection": "complaints", "field": "studentId", "order": "ascending" },
+    { "collection": "complaints", "field": "status",    "order": "ascending" }
+  ]
+}

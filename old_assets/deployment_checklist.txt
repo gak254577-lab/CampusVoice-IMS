@@ -1,0 +1,62 @@
+CampusVoice — Deployment Checklist (Legacy)
+============================================
+Version: 0.9 Beta | Last Updated: 2025-08-01
+Status: ARCHIVED — Replaced by Netlify auto-deploy pipeline
+
+------------------------------------------------------------
+PRE-DEPLOYMENT
+------------------------------------------------------------
+
+[ ] Run `npm run build` and verify no errors
+[ ] Check all environment variables are set correctly
+[ ] Confirm Firebase project is pointing to production
+[ ] Verify Firestore security rules are deployed
+[ ] Test admin login and student login flows manually
+[ ] Review complaint submission end-to-end
+[ ] Check mobile viewport on Chrome DevTools
+[ ] Verify notification toasts appear correctly
+[ ] Confirm anonymous complaint toggle works
+[ ] Test ticket status update from admin panel
+
+------------------------------------------------------------
+DEPLOYMENT STEPS (Old Manual Process)
+------------------------------------------------------------
+
+Step 1: Build the project
+  $ npm run build
+
+Step 2: Upload /dist folder to cPanel File Manager
+  - Navigate to public_html/campusvoice/
+  - Delete old files (except .htaccess)
+  - Upload new /dist contents
+
+Step 3: Verify deployment at:
+  http://campusvoice-dev.placeholder.example
+
+Step 4: Clear CDN cache (if applicable)
+
+Step 5: Notify team on group chat
+
+------------------------------------------------------------
+POST-DEPLOYMENT VERIFICATION
+------------------------------------------------------------
+
+[ ] Homepage loads without errors
+[ ] Login form accepts test credentials
+[ ] Complaint submission creates ticket in Firestore
+[ ] Admin dashboard shows all tickets
+[ ] Responsive layout on mobile device
+
+------------------------------------------------------------
+ROLLBACK PROCEDURE
+------------------------------------------------------------
+
+1. Go to cPanel File Manager
+2. Restore from backup folder /backup_YYYYMMDD/
+3. Notify team immediately
+
+------------------------------------------------------------
+NOTE: This checklist is outdated.
+Current deployments are fully automated via Netlify CI/CD.
+Pushing to `main` branch triggers automatic build and deploy.
+------------------------------------------------------------

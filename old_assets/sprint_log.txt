@@ -1,0 +1,103 @@
+CampusVoice — Sprint Log (Archived)
+=====================================
+Team: IMSEC CS Final Year Project Group
+Methodology: Informal Agile Sprints (2-week cycles)
+
+-----------------------------------------------------
+SPRINT 1 — 15 Jan to 28 Jan 2025
+Goal: Project setup and base scaffolding
+-----------------------------------------------------
+
+Completed:
+  [x] GitHub repository initialised
+  [x] Vite + React + TypeScript project bootstrapped
+  [x] Firebase project created (Firestore, Auth)
+  [x] Basic folder structure defined
+  [x] Tailwind CSS integrated
+  [x] Google Auth login prototype working locally
+
+Blocked:
+  [ ] Firestore security rules — waiting for faculty approval on data access model
+
+Velocity: 8 story points completed / 10 planned
+
+-----------------------------------------------------
+SPRINT 2 — 29 Jan to 11 Feb 2025
+Goal: Login, Profile setup, and Navigation
+-----------------------------------------------------
+
+Completed:
+  [x] Login screen UI with dark glassmorphic design
+  [x] Profile registration modal on first login
+  [x] Navigation tabs (Dashboard, My Tickets, Analytics)
+  [x] Role detection (student vs admin) from Firestore
+  [x] GlowBackground and RingCursor components added
+
+Blocked:
+  [ ] Admin dashboard — deferred to Sprint 3
+
+Velocity: 11 story points completed / 12 planned
+
+-----------------------------------------------------
+SPRINT 3 — 12 Feb to 25 Feb 2025
+Goal: Complaint submission and ticket management
+-----------------------------------------------------
+
+Completed:
+  [x] Complaint submission modal with category, title, description
+  [x] Photo attachment (drag & drop + browse)
+  [x] Ticket ID generation (format: CV-2026-XXXXX)
+  [x] Anonymous submission toggle
+  [x] Firestore ticket creation and local storage fallback
+  [x] My Tickets view with filter and search
+
+Velocity: 14 story points completed / 14 planned ✅
+
+-----------------------------------------------------
+SPRINT 4 — 26 Feb to 11 Mar 2025
+Goal: Admin panel and AI integration
+-----------------------------------------------------
+
+Completed:
+  [x] Admin ticket management view
+  [x] Status update (In Review, Resolved, Rejected, Escalated)
+  [x] Admin notes and assignee fields
+  [x] Gemini AI severity tagging integration (via Express proxy)
+  [x] Client-side fallback when backend unavailable
+
+Velocity: 13 story points completed / 15 planned
+
+-----------------------------------------------------
+SPRINT 5 — 12 Mar to 25 Mar 2025
+Goal: Analytics, Notifications, Polish
+-----------------------------------------------------
+
+Completed:
+  [x] Google Charts analytics dashboard
+  [x] Toast notification system
+  [x] In-app push notification bell
+  [x] Auto-escalation for tickets older than 48 hours
+  [x] Skeleton loaders for data loading states
+  [x] Responsive layout improvements
+
+Velocity: 16 story points completed / 16 planned ✅
+
+-----------------------------------------------------
+SPRINT 6 — Final — 26 Mar to 10 Apr 2025
+Goal: Testing, Bug fixes, Deployment
+-----------------------------------------------------
+
+Completed:
+  [x] Cross-browser testing (Chrome, Firefox, Edge)
+  [x] Mobile responsiveness audit
+  [x] All critical bugs resolved
+  [x] Netlify deployment configured
+  [x] Firestore security rules finalised and deployed
+  [x] README updated
+
+Velocity: 10 story points completed / 10 planned ✅
+
+-----------------------------------------------------
+PROJECT OUTCOME: SUCCESSFULLY DEPLOYED
+Live URL: https://campussvoice.netlify.app
+-----------------------------------------------------

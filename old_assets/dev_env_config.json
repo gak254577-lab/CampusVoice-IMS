@@ -1,0 +1,48 @@
+{
+  "_comment": "ARCHIVED — Old local dev environment setup. No longer accurate. See .env.example for current setup.",
+  "_archived_on": "2025-07-15",
+
+  "dev_server": {
+    "host": "localhost",
+    "port": 4000,
+    "proxy_target": "http://localhost:3000",
+    "hot_reload": true,
+    "open_browser": false
+  },
+
+  "mock_database": {
+    "type": "json-server",
+    "db_file": "./mock_db.json",
+    "port": 4001,
+    "routes_file": "./mock_routes.json",
+    "delay_ms": 200
+  },
+
+  "legacy_smtp": {
+    "_note": "SMTP was removed in v2. Notifications are now handled in-app.",
+    "host": "smtp.placeholder.example",
+    "port": 587,
+    "secure": false,
+    "from_address": "noreply@placeholder.example"
+  },
+
+  "feature_flags": {
+    "enable_ai_analysis": false,
+    "enable_notifications": false,
+    "enable_file_uploads": false,
+    "enable_anonymous_mode": false,
+    "enable_admin_panel": true
+  },
+
+  "mock_admin_accounts": [
+    { "role": "warden",    "department": "Hostel" },
+    { "role": "dean",      "department": "Academics" },
+    { "role": "registrar", "department": "Administration" }
+  ],
+
+  "old_cors_whitelist": [
+    "http://localhost:3000",
+    "http://localhost:4000",
+    "http://campusvoice-dev.local"
+  ]
+}

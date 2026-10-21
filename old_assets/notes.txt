@@ -1,0 +1,33 @@
+======================================================
+CampusVoice - Development Notes (Archived)
+======================================================
+
+[2025-03-10] Initial planning session notes
+- Discussed grievance portal requirements with team
+- Agreed on student-facing ticket system
+- Admin panel to support multiple roles: Warden, Dean, Registrar
+
+[2025-04-02] UI brainstorming
+- Dark theme preferred by student focus group
+- Mobile-first layout to be considered in v2
+- Notification system using in-app push alerts
+
+[2025-05-18] Backend discussion
+- Firebase Firestore selected for real-time data sync
+- Express.js proxy for Gemini AI integration
+- Deployment target: Netlify (static) + optional Node backend
+
+[2025-06-01] Features finalised for v1
+- Student: lodge complaint, view status, attach photo
+- Admin: view all tickets, update status, assign department
+- Severity tagging via AI analysis
+
+[2025-09-14] Deferred to v2
+- SMS notifications
+- Parent portal access
+- Multi-college support
+- Offline mode with PWA caching
+
+Note: This file is archived and no longer maintained.
+All active documentation has been moved to the team wiki.
+======================================================

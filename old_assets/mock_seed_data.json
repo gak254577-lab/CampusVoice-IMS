@@ -1,0 +1,72 @@
+[
+  {
+    "id": "mock-001",
+    "ticketId": "CV-2025-00011",
+    "studentName": "Sample Student A",
+    "studentEmail": "sample.a@placeholder.example",
+    "category": "Hostel",
+    "title": "Water supply issue in Block A",
+    "description": "Water is not available on the 2nd floor of Block A since yesterday morning.",
+    "severity": "Urgent",
+    "status": "Resolved",
+    "assignedTo": "warden@placeholder.example",
+    "createdAt": "2025-02-10T09:15:00Z",
+    "resolvedAt": "2025-02-11T14:30:00Z"
+  },
+  {
+    "id": "mock-002",
+    "ticketId": "CV-2025-00023",
+    "studentName": "Sample Student B",
+    "studentEmail": "sample.b@placeholder.example",
+    "category": "WiFi",
+    "title": "No internet in Library Reading Hall",
+    "description": "The WiFi router on Floor 1 of the library has been down for 3 days.",
+    "severity": "Normal",
+    "status": "In Review",
+    "assignedTo": "it.support@placeholder.example",
+    "createdAt": "2025-03-05T11:00:00Z",
+    "resolvedAt": null
+  },
+  {
+    "id": "mock-003",
+    "ticketId": "CV-2025-00034",
+    "studentName": "Anonymous",
+    "studentEmail": "anon@placeholder.example",
+    "category": "Canteen",
+    "title": "Stale food served in mess",
+    "description": "The food served at dinner last night appeared stale and smelled off.",
+    "severity": "Urgent",
+    "status": "Resolved",
+    "assignedTo": "dean@placeholder.example",
+    "createdAt": "2025-03-18T20:45:00Z",
+    "resolvedAt": "2025-03-19T10:00:00Z"
+  },
+  {
+    "id": "mock-004",
+    "ticketId": "CV-2025-00047",
+    "studentName": "Sample Student C",
+    "studentEmail": "sample.c@placeholder.example",
+    "category": "Classroom",
+    "title": "Projector not working in Room 301",
+    "description": "The projector in Classroom 301 has been non-functional for over a week.",
+    "severity": "Normal",
+    "status": "Submitted",
+    "assignedTo": null,
+    "createdAt": "2025-04-02T08:30:00Z",
+    "resolvedAt": null
+  },
+  {
+    "id": "mock-005",
+    "ticketId": "CV-2025-00059",
+    "studentName": "Sample Student D",
+    "studentEmail": "sample.d@placeholder.example",
+    "category": "Library",
+    "title": "Books not available for 3rd year CSE syllabus",
+    "description": "Required reference books for the Data Structures course are not available in library.",
+    "severity": "Low",
+    "status": "Resolved",
+    "assignedTo": "librarian@placeholder.example",
+    "createdAt": "2025-04-15T13:00:00Z",
+    "resolvedAt": "2025-04-20T09:30:00Z"
+  }
+]
