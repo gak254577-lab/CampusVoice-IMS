@@ -3,8 +3,8 @@
     ======================================================================
     TechSpardha 2K26 Cyber Hunt - Campus Asset Discovery
     Asset: IMSEC CampusVoice Official Crest Vector (v3.2)
-    Security Token: GUF{synt-pnzchf}
-    Hint: Apply Caesar ROT13 to decode the campus flag.
+    Flag 5 : VEhTe2ZsYWctY2FtcHVzfQ==
+    Hint: Use Base64 to get the falg 
     ======================================================================
   -->
   <defs>
