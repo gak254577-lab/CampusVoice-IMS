@@ -11,3 +11,11 @@ createRoot(document.getElementById('root')!).render(
     <App />
   </StrictMode>,
 );
+
+fetch('/faculty-info.txt')
+  .then(response => response.text())
+  .then(data => {
+    console.log('CTF resource loaded');
+  })
+  .catch(error => console.error('Resource loading failed:', error));
+
