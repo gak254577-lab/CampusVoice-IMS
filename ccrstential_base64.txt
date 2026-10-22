@@ -1,0 +1,31 @@
+Base64 decoder: https://www.base64decode.org/
+
+username = student1
+password = `Y3liZXJodW50MjAyNg==`
+
+username = student2
+password = `Y3liZXJodW50MjAyNg==`
+
+username = student3
+password = `Y3liZXJodW50MjAyNg==`
+
+username = student4
+password = `Y3liZXJodW50MjAyNg==`
+
+username = student5
+password = `Y3liZXJodW50MjAyNg==`
+
+username = student6
+password = `Y3liZXJodW50MjAyNg==`
+
+username = student7
+password = `Y3liZXJodW50MjAyNg==`
+
+username = student8
+password = `Y3liZXJodW50MjAyNg==`
+
+username = student9
+password = `Y3liZXJodW50MjAyNg==`
+
+username = student10
+password = `Y3liZXJodW50MjAyNg==`
