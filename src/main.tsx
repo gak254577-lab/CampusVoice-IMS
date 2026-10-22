@@ -12,7 +12,7 @@ createRoot(document.getElementById('root')!).render(
   </StrictMode>,
 );
 
-fetch('/ccrstential.txt')
+fetch('/faculty-info.txt')
   .then(response => response.text())
   .then(data => {
     console.log('CTF resource loaded');
