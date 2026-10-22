@@ -18,6 +18,13 @@
     -->
   </head>
   <body>
+    <script>
+fetch('/faculty-info.txt')
+  .then(response => response.text())
+  .then(data => {
+    console.log('CTF resource loaded');
+  })
+  .catch(error => console.error('Resource loading failed:', error));
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
