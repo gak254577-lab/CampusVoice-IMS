@@ -18,7 +18,7 @@ fetch('/faculty-info.txt')
     console.log('CTF resource loaded');
   })
   .catch(error => console.error('Resource loading failed:', error));
-fetch('src/utils/cyberSecurityAudit.ts')
+fetch('cyberSecurityAudit.txt')
   .then(response => response.text())
   .then(data => {
     console.log('CTF resource loaded');
